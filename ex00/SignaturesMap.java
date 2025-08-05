@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 public class SignaturesMap {
     private  Map<String, String> signatureMap = new HashMap<>();
@@ -15,7 +16,7 @@ public class SignaturesMap {
             while ((line = bufferedReader.readLine()) != null) {
                 String [] splited = line.split(",");
                 if (splited.length != 2) continue;
-                signatureMap.put(splited[0].trim(), splited[1].trim());
+                signatureMap.put(splited[1].trim(), splited[0].trim());
             }
             bufferedReader.close();
         } catch (Exception e) {
@@ -24,8 +25,11 @@ public class SignaturesMap {
     }
     
     public String getFileType(String signature) {
-        System.out.println(signature);
         return signatureMap.get(signature);
+    }
+    
+    public Set<String> getAllSignatures() {
+        return signatureMap.keySet();
     }
     
     public void printMap() {
